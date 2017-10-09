@@ -109,9 +109,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void ok() {
                if (TextUtils.isEmpty(interPasswordDialog.getPassword())){
-                   System.out.println("是事实1111");
+
                    Toast.makeText(HomeActivity.this,"密码不能为空",Toast.LENGTH_LONG).show();
-               }else if (interPasswordDialog.getPassword().equals(password)){
+               }else if (password.equals(MD5Utils.encode(interPasswordDialog.getPassword()))){
                    interPasswordDialog.dismiss();
                    Toast.makeText(HomeActivity.this,"可以进入手机防盗",Toast.LENGTH_LONG).show();
                }else{
