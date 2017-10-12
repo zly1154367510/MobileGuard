@@ -1,6 +1,5 @@
 package cn.edu.gdmec.android.mobileguard.m1home;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,11 +12,10 @@ import android.widget.Toast;
 
 import cn.edu.gdmec.android.mobileguard.R;
 import cn.edu.gdmec.android.mobileguard.m1home.adapter.HomeAdapter;
+import cn.edu.gdmec.android.mobileguard.m2theftguard.LostFindActivity;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.dialog.InterPasswordDialog;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.dialog.SetUpPasswrodDialog;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.utils.MD5Utils;
-
-import static cn.edu.gdmec.android.mobileguard.R.id.gv_home;
 
 public class HomeActivity extends AppCompatActivity {
     private GridView gv_home;
@@ -45,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
                         }
                 }
             }
-        });   System.out.println("是事实");
+        });
     }
 
     @Override
@@ -103,30 +101,39 @@ public class HomeActivity extends AppCompatActivity {
     public void setInterPswdDialog(){
 
         final String password=getPassword();
-        final InterPasswordDialog interPasswordDialog=new InterPasswordDialog(HomeActivity.this);
+        final InterPasswordDialog mInPswdDialog=new InterPasswordDialog(HomeActivity.this);
 
-        interPasswordDialog.setMyCallBack(new InterPasswordDialog.MyCallBack() {
+        mInPswdDialog.setMyCallBack(new InterPasswordDialog.MyCallBack() {
             @Override
             public void ok() {
-               if (TextUtils.isEmpty(interPasswordDialog.getPassword())){
+               if (TextUtils.isEmpty(mInPswdDialog.getPassword())){
 
                    Toast.makeText(HomeActivity.this,"密码不能为空",Toast.LENGTH_LONG).show();
-               }else if (password.equals(MD5Utils.encode(interPasswordDialog.getPassword()))){
-                   interPasswordDialog.dismiss();
+               }else if (password.equals(MD5Utils.encode(mInPswdDialog.getPassword()))){
+                   mInPswdDialog.dismiss();
+
+                  // startActivity(LostFindActivity.class);
                    Toast.makeText(HomeActivity.this,"可以进入手机防盗",Toast.LENGTH_LONG).show();
                }else{
+                   mInPswdDialog.dismiss();
                    Toast.makeText(HomeActivity.this,"密码错误",Toast.LENGTH_LONG).show();
                }
             }
 
+            
+
+
             @Override
             public void cancel() {
-                 interPasswordDialog.dismiss();
+                mInPswdDialog.dismiss();
             }
         });
-        interPasswordDialog.setCancelable(true);
-        interPasswordDialog.show();
+        mInPswdDialog.setCancelable(true);
+        mInPswdDialog.show();
     }
+
+
+
 
     /*
     判断用户是否设置手机防盗密码
