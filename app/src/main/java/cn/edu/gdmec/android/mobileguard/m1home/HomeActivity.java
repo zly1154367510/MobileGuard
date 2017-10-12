@@ -172,4 +172,9 @@ public class HomeActivity extends AppCompatActivity {
         }
         return password;
     }
+
+    public void startActivity(){
+
+    }
+
 }
