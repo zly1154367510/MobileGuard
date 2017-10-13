@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="100"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@color/purple">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/imgv"
+                android:layout_centerInParent="true"
+                android:background="@drawable/add"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgv"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="请选择安全联系人"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+        </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        android:background="@drawable/security_phone">
+
+        <TextView
+            android:id="@+id/tv_setup4_status"
+            style="@style/textview16sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:drawablePadding="10dp"
+            android:textColor="@color/purple"
+            />
+
+        <ToggleButton
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:id="@+id/togglebtn_securityfunction"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="27dp"
+            android:background="@drawable/toggle_btn_bg_selector"
+            android:textOff=""
+            android:textOn=""/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_weight="10"
+        android:background="@color/purple"
+        android:gravity="center">
+
+        <include layout="@layout/setup_radiogroup"/>
+    </LinearLayout>
+</LinearLayout>
