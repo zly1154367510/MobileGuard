@@ -35,7 +35,7 @@
                 android:textSize="18sp" />
 
         </RelativeLayout>
-        </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -56,7 +56,6 @@
             android:id="@+id/togglebtn_securityfunction"
             android:layout_width="70dp"
             android:layout_height="30dp"
-
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="27dp"
@@ -64,7 +63,7 @@
             android:textOff=""
             android:textOn=""/>
     </RelativeLayout>
-
+</LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"

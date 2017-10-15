@@ -75,9 +75,9 @@
                 android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/coner_white_rec"
+                android:background="@drawable/sim_bind_selector"
                 android:gravity="center"
-                android:text="绑定SIM卡" />
+                 />
         </LinearLayout>
 
     </LinearLayout>
