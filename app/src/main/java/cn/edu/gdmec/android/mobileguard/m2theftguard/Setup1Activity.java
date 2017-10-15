@@ -14,7 +14,7 @@ import cn.edu.gdmec.android.mobileguard.m2theftguard.utils.BaseSetUpActivity;
 
 public class Setup1Activity extends BaseSetUpActivity {
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_1);
         ((RadioButton)findViewById(R.id.rb_first)).setChecked(true);
@@ -22,11 +22,13 @@ public class Setup1Activity extends BaseSetUpActivity {
 
     @Override
     public void showNext() {
-       startActivityFinishSelf (Setup2Activity.class);
+
+        startActivityFinishSelf (Setup2Activity.class);
     }
 
     @Override
     public void showPre() {
+
         Toast.makeText(this,"当前已是第一页",Toast.LENGTH_LONG).show();
     }
 }
