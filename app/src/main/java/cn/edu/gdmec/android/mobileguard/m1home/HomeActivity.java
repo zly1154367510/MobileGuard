@@ -79,7 +79,8 @@ public class HomeActivity extends AppCompatActivity {
                     if (firstPwsd.equals(affirmPwsd)){//如果两个密码框输入一样
                          savePWD(firstPwsd);
                          setUpPasswrodDialog.dismiss();
-
+                        Toast.makeText(HomeActivity.this,"设置成功",Toast.LENGTH_LONG).show();
+                        setInterPswdDialog();
                     }else{
                         Toast.makeText(HomeActivity.this,"两次密码输入不同",Toast.LENGTH_LONG).show();
                     }
