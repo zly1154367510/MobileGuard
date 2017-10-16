@@ -12,19 +12,21 @@ import cn.edu.gdmec.android.mobileguard.m2theftguard.utils.BaseSetUpActivity;
 
 public class Setup3Activity  extends BaseSetUpActivity {
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(cn.edu.gdmec.android.mobileguard.R.layout.activity_setup_3);
-        ((RadioButton)findViewById(cn.edu.gdmec.android.mobileguard.R.id.rb_first)).setChecked(true);
+        ((RadioButton)findViewById(cn.edu.gdmec.android.mobileguard.R.id.rb_third)).setChecked(true);
     }
 
     @Override
     public void showNext() {
+
         startActivityFinishSelf (Setup4Activity.class);
     }
 
     @Override
     public void showPre() {
-        startActivityFinishSelf (Setup3Activity.class);
+
+        startActivityFinishSelf (Setup2Activity.class);
     }
 }

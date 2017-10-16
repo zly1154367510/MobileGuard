@@ -13,19 +13,22 @@ import cn.edu.gdmec.android.mobileguard.m2theftguard.utils.BaseSetUpActivity;
 
 public class Setup4Activity  extends BaseSetUpActivity {
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(cn.edu.gdmec.android.mobileguard.R.layout.activity_setup_4);
-        ((RadioButton)findViewById(cn.edu.gdmec.android.mobileguard.R.id.rb_first)).setChecked(true);
+        ((RadioButton)findViewById(cn.edu.gdmec.android.mobileguard.R.id.rb_four)).setChecked(true);
     }
 
     @Override
     public void showNext() {
-        startActivityFinishSelf (Setup1Activity.class);
+        Toast.makeText(this, "过不去了", Toast.LENGTH_LONG).show();
+
+
     }
 
     @Override
     public void showPre() {
-        Toast.makeText(this, "过不去了", Toast.LENGTH_LONG).show();
+
+        startActivityFinishSelf (Setup3Activity.class);
     }
 }

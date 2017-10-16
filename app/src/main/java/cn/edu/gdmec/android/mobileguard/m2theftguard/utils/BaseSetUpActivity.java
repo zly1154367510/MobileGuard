@@ -32,10 +32,11 @@ public abstract class BaseSetUpActivity extends AppCompatActivity {
     public void startActivityFinishSelf(Class<?> cls){
         Intent intent = new Intent(BaseSetUpActivity.this,cls);
         startActivity(intent);
+        finish();
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         sp=getSharedPreferences("config",MODE_PRIVATE);
