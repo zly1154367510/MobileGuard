@@ -6,7 +6,6 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import cn.edu.gdmec.android.mobileguard.R;
-import cn.edu.gdmec.android.mobileguard.m2theftguard.utils.BaseSetUpActivity;
 
 /**
  * Created by zly11 on 2017/10/12.
@@ -14,7 +13,7 @@ import cn.edu.gdmec.android.mobileguard.m2theftguard.utils.BaseSetUpActivity;
 
 public class Setup1Activity extends BaseSetUpActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_1);
         ((RadioButton)findViewById(R.id.rb_first)).setChecked(true);

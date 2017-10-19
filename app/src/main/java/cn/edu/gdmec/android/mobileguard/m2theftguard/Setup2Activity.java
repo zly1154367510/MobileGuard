@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.widget.RadioButton;
 
 import cn.edu.gdmec.android.mobileguard.R;
-import cn.edu.gdmec.android.mobileguard.m2theftguard.utils.BaseSetUpActivity;
 
 /**
  * Created by zly11 on 2017/10/13.
