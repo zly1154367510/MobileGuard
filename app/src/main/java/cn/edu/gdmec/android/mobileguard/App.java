@@ -26,6 +26,7 @@ public class App extends Application {
             String simNum=sp.getString("sim","");
             TelephonyManager mTelephoneManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
             String smimm=mTelephoneManager.getSimSerialNumber();
+            smimm="999";
             if (simNum.equals(smimm)) {
                 Log.i("","sim卡未发生改变");
             }else{
