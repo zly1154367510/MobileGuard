@@ -80,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
                          savePWD(firstPwsd);
                          setUpPasswrodDialog.dismiss();
                         Toast.makeText(HomeActivity.this,"设置成功",Toast.LENGTH_LONG).show();
-                       
+
                     }else{
                         Toast.makeText(HomeActivity.this,"两次密码输入不同",Toast.LENGTH_LONG).show();
                     }
