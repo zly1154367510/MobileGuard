@@ -25,22 +25,27 @@ public class Setup2Activity  extends BaseSetUpActivity implements View.OnClickLi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_2);
-        ((RadioButton)findViewById(R.id.rb_first)).setChecked(true);
+        ((RadioButton)findViewById(R.id.rb_second)).setChecked(true);
 
         mBindSIMBtn=(Button)findViewById(R.id.btn_bind_sim);
         mBindSIMBtn.setOnClickListener(this);
         mTelephoneManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-        bindBtnShow();
+        if (isBind()){
+            mBindSIMBtn.setEnabled(false);
+        }else{
+            mBindSIMBtn.setEnabled(true);
+        }
     }
 
     @Override
     public void showNext() {
 
-        if (isBind()) {
-            Toast.makeText(this,"哈哈哈",Toast.LENGTH_SHORT);
-            startActivityFinishSelf(Setup3Activity.class);
-        }else{
+        if (!isBind()) {
             Toast.makeText(this,"还没有绑定sim卡",Toast.LENGTH_SHORT);
+          
+        }else{
+
+            startActivityFinishSelf(Setup3Activity.class);
         }
     }
 
