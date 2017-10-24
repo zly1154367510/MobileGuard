@@ -44,11 +44,11 @@ public class Setup3Activity  extends BaseSetUpActivity implements View.OnClickLi
 
         String helpPhoneNum=mInputPhone.getText().toString().trim();
         if (TextUtils.isEmpty(helpPhoneNum)){
-            Toast.makeText(this,"安全号码为空",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"请输入安全号码",Toast.LENGTH_LONG).show();
             return;
         }
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("help",helpPhoneNum);
+        editor.putString("safephone",helpPhoneNum);
         editor.commit();
         startActivityFinishSelf (Setup4Activity.class);
     }
