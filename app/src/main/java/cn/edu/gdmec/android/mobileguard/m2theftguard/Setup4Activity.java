@@ -24,6 +24,7 @@ public class Setup4Activity  extends BaseSetUpActivity {
         super.onCreate(savedInstanceState);
         setContentView(cn.edu.gdmec.android.mobileguard.R.layout.activity_setup_4);
         ((RadioButton)findViewById(cn.edu.gdmec.android.mobileguard.R.id.rb_four)).setChecked(true);
+        initView();
     }
 
     //初始化视图方法
