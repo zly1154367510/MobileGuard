@@ -71,7 +71,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:text="重新进入设置向导"
+            android:text="重新进入向导"
             android:textColor="@color/purple"
             />
         <ImageView

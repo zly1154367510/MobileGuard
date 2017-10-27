@@ -37,34 +37,34 @@
 
         </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@android:color/white">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/white">
 
-        <TextView
-            android:id="@+id/tv_setup4_status"
-            style="@style/textview16sp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:drawableLeft="@drawable/security_phone"
-            android:drawablePadding="10dp"
-            android:textColor="@color/purple"
-            />
+            <TextView
+                android:id="@+id/tv_setup4_status"
+                style="@style/textview16sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/security_phone"
+                android:drawablePadding="10dp"
+                android:textColor="@color/purple"
+                android:text="防盗保护没有开启"/>
 
-        <ToggleButton
-            android:id="@+id/togglebtn_securityfunction"
-            android:layout_width="70dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="27dp"
-            android:background="@drawable/toggle_btn_bg_selector"
-            android:textOff=""
-            android:textOn=""/>
-    </RelativeLayout>
-</LinearLayout>
+            <ToggleButton
+                android:id="@+id/togglebtn_securityfunction"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="27dp"
+                android:background="@drawable/toggle_btn_bg_selector"
+                android:textOff=""
+                android:textOn="" />
+        </RelativeLayout>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
