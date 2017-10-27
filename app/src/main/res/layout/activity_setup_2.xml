@@ -16,13 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:background="@color/purple">
-定
+
             <ImageView
                 android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:id="@+id/imgv"
-            android:layout_centerInParent="true"
-            android:background="@drawable/add"/>
+                android:layout_height="80dp"
+                android:id="@+id/imgv"
+                android:layout_centerInParent="true"
+                android:background="@drawable/add"/>
 
             <TextView
                 android:layout_width="match_parent"
