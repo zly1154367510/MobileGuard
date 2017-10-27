@@ -37,11 +37,15 @@ public class Setup4Activity extends BaseSetUpActivity {
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked){
                 if (isChecked){
                     mStatusTV.setText("防盗保护已经开启");
+                    SharedPreferences.Editor editor=sp.edit();
+                    editor.putBoolean("isSetUp",true);
+                    editor.commit();
                 }else{
                     mStatusTV.setText("防盗保护没有开启");
                 }
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putBoolean("protecting",isChecked);
+                editor.putBoolean("isSetUp",true);
                 editor.commit();
             }
         });
@@ -57,9 +61,9 @@ public class Setup4Activity extends BaseSetUpActivity {
 
     @Override
     public void showNext(){
-        SharedPreferences.Editor editor=sp.edit();
-        editor.putBoolean("isSetUp",true);
-        editor.commit();
+//        SharedPreferences.Editor editor=sp.edit();
+//        editor.putBoolean("isSetUp",true);
+//        editor.commit();
         startActivityFinishSelf(LostFindActivity.class);
     }
 
