@@ -25,16 +25,16 @@ public class Setup3Activity  extends BaseSetUpActivity implements View.OnClickLi
     private EditText mInputPhone;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(cn.edu.gdmec.android.mobileguard.R.layout.activity_setup_3);
         ((RadioButton)findViewById(cn.edu.gdmec.android.mobileguard.R.id.rb_third)).setChecked(true);
         mSelectBtn = (Button)findViewById(R.id.btn_addcontact);
         mSelectBtn.setOnClickListener(this);
         mInputPhone=(EditText)findViewById(R.id.et_inputphone);
-        String helpPhoneNum=sp.getString("help",null);
-        if (!TextUtils.isEmpty(helpPhoneNum)){
-            mInputPhone.setText(helpPhoneNum);
+        String safephone=sp.getString("safephone",null);
+        if (!TextUtils.isEmpty(safephone)){
+            mInputPhone.setText(safephone);
         }
     }
 
@@ -42,13 +42,13 @@ public class Setup3Activity  extends BaseSetUpActivity implements View.OnClickLi
     public void showNext() {
 
 
-        String helpPhoneNum=mInputPhone.getText().toString().trim();
-        if (TextUtils.isEmpty(helpPhoneNum)){
+        String safePhone=mInputPhone.getText().toString().trim();
+        if (TextUtils.isEmpty(safePhone)){
             Toast.makeText(this,"请输入安全号码",Toast.LENGTH_LONG).show();
             return;
         }
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("safephone",helpPhoneNum);
+        editor.putString("safephone",safePhone);
         editor.commit();
         startActivityFinishSelf (Setup4Activity.class);
     }
@@ -60,8 +60,8 @@ public class Setup3Activity  extends BaseSetUpActivity implements View.OnClickLi
     }
 
     @Override
-    public void onClick(View v) {
-          switch (v.getId()){
+    public void onClick(View view) {
+          switch (view.getId()){
               case R.id.btn_addcontact:
                   startActivityForResult(new Intent(this,ContactSelectActivity.class),0);
                   break;
