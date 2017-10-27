@@ -27,44 +27,29 @@ public class LostFindActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lost_find);
-        msharedPreferences = getSharedPreferences("config",MODE_PRIVATE);
-        if (!isSetup()){
-            Intent intent = new Intent(LostFindActivity.this,Setup1Activity.class);
-            startActivity(intent);
-            finish();
+        msharedPreferences=getSharedPreferences("config",MODE_PRIVATE);
+        if (!isSetUp()){
+            startSetUp1Activity();
         }
         initView();
     }
-
-    //初始化视图方法
+    private  boolean isSetUp(){
+        return msharedPreferences.getBoolean("isSetUp",false);
+    }
     private void initView(){
-        TextView mTitle = (TextView)findViewById(R.id.tv_title);
-        mTitle.setText("手机防盗");
-        ImageView mLeftImgv = (ImageView)findViewById(R.id.imgv_leftbtn);
-        mLeftImgv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        TextView mTitleTV = (TextView) findViewById(R.id.tv_title);
+        mTitleTV.setText("手机防盗");
+        ImageView mLeftImgv = (ImageView) findViewById(R.id.imgv_leftbtn);
+        mLeftImgv.setOnClickListener(this);
         mLeftImgv.setImageResource(R.drawable.back);
-        //设置导航栏背景颜色
-        findViewById(R.id.rl_titlebar).setBackgroundColor(getResources().getColor(R.color.purple));
-        mSafePhoneTV = (TextView)findViewById(R.id.tv_safephone);
-        mSafePhoneTV.setText(msharedPreferences.getString("safephone",""));
-
-        mToggleButton = (ToggleButton)findViewById(R.id.togglebtn_lostfind);
-        //设置重新进入设置向导的点击事件
-        mInterSetupRL = (RelativeLayout)findViewById(R.id.rl_inter_setup_wizard);
-        mInterSetupRL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LostFindActivity.this,Setup1Activity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        mProtectStatusTV = (TextView)findViewById(R.id.tv_lostfind_protectstauts);
+        findViewById(R.id.rl_titlebar).setBackgroundColor(
+                getResources().getColor(R.color.purple));
+        mSafePhoneTV = (TextView) findViewById(R.id.tv_safephone);
+        mSafePhoneTV.setText(msharedPreferences.getString("safephone", ""));
+        mToggleButton = (ToggleButton) findViewById(R.id.togglebtn_lostfind);
+        mInterSetupRL = (RelativeLayout) findViewById(R.id.rl_inter_setup_wizard);
+        mInterSetupRL.setOnClickListener(this);
+        mProtectStatusTV = (TextView) findViewById(R.id.tv_lostfind_protectstauts);
         boolean protecting = msharedPreferences.getBoolean("protecting",true);
         if (protecting){
             mProtectStatusTV.setText("防盗保护已经开启");
@@ -86,22 +71,21 @@ public class LostFindActivity extends AppCompatActivity implements View.OnClickL
                 editor.commit();
             }
         });
-
     }
-
-    //查看在setup4设置完成后设置的键储存值
-    private boolean isSetup(){
-       boolean bool = msharedPreferences.getBoolean("isSetUp",false);
-        return bool;
-    }
-
-    @Override
-    public void onClick(View v) {
-
-    }
-    /*    private void startSetUp1Activity(){
+    private void startSetUp1Activity(){
         Intent intent = new Intent(LostFindActivity.this,Setup1Activity.class);
         startActivity(intent);
         finish();
-    }*/
+    }
+    @Override
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.rl_inter_setup_wizard:
+                startSetUp1Activity();
+                break;
+            case R.id.imgv_leftbtn:
+                finish();
+                break;
+        }
+    }
 }
