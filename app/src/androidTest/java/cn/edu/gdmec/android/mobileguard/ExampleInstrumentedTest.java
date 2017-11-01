@@ -13,6 +13,7 @@ import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -42,6 +43,8 @@ public class ExampleInstrumentedTest {
     private static final int LAUNCH_TIMEOUT = 5000;
     //设备实例
     private UiDevice mDevice;
+    private String str,str1,str2;
+    private UiObject result;
     @Before
     public void startMainActivityFromHomeScreen() {
         // 初始化 UiDevice 实例
@@ -265,7 +268,7 @@ public class ExampleInstrumentedTest {
         assertEquals("security contact phonenumber",str,"1 376-079-5885");
     }
 
-    @Test
+    //@Test
     public void t09ConfirmDeviceAdmin() throws UiObjectNotFoundException {
         UiObject result = mDevice.findObject(new UiSelector().textStartsWith("激活此设备管理员"));
         String str = result.getText();
@@ -273,7 +276,7 @@ public class ExampleInstrumentedTest {
         result = mDevice.findObject(new UiSelector().textStartsWith("手机防盗"));
         str = result.getText();
     }
-    @Test
+    //@Test
     public void t10SetupTheftGuard() throws UiObjectNotFoundException {
         UiObject result = mDevice.findObject(new UiSelector().textStartsWith("手机防盗"));
         result.clickAndWaitForNewWindow();
@@ -292,15 +295,15 @@ public class ExampleInstrumentedTest {
         result = mDevice.findObject(new UiSelector().textStartsWith("确认"));
         result.clickAndWaitForNewWindow();
         mDevice.wait(Until.hasObject(By.textStartsWith("手机防盗向导")),LAUNCH_TIMEOUT);
-        mDevice.swipe(400,300,0,300,100);
+        mDevice.swipe(400,300,0,300,50);
         mDevice.wait(Until.hasObject(By.textStartsWith("SIM卡绑定")),LAUNCH_TIMEOUT);
         results = mDevice.findObjects(By.clazz(Button.class));
         UiObject2 btn = results.get(0);
         btn.click();
-        mDevice.swipe(400,300,0,300,100);
+        mDevice.swipe(400,300,0,300,50);
         result = mDevice.findObject(new UiSelector().className("android.widget.EditText"));
         result.setText("110");
-        mDevice.swipe(400,300,0,300,100);
+        mDevice.swipe(400,300,0,300,50);
         result = mDevice.findObject(new UiSelector().textStartsWith("防盗保护已经开启"));
         String str = result.getText();
         result = mDevice.findObject(new UiSelector().className("android.widget.ToggleButton"));
@@ -309,9 +312,9 @@ public class ExampleInstrumentedTest {
         str = result.getText();
         result = mDevice.findObject(new UiSelector().className("android.widget.ToggleButton"));
         result.click();
-        mDevice.swipe(400,300,0,300,100);
+        mDevice.swipe(400,300,0,300,50);
     }
-    @Test
+    //@Test
     public void t11ReSetupTheftGuard() throws UiObjectNotFoundException {
         UiObject result = mDevice.findObject(new UiSelector().textStartsWith("手机防盗"));
         result.clickAndWaitForNewWindow();
@@ -326,5 +329,65 @@ public class ExampleInstrumentedTest {
         result = mDevice.findObject(new UiSelector().textStartsWith("手机防盗向导"));
         String str = result.getText();
     }
+    @Test
+    public void t12CommunicationGuardWithoutTitleBar() throws Exception {
+        UiObject result = mDevice.findObject(new UiSelector().textStartsWith("通讯卫士"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().textStartsWith("MobileGuard"));
+        if(result.exists()){
+            throw new Exception("Found Titlebar in SecurityPhoneActivity.");
+        }
 
+    }
+    @Test
+    public void t13AddBlackCannotNull() throws Exception {
+        UiObject result = mDevice.findObject(new UiSelector().textStartsWith("通讯卫士"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().className("android.widget.Button"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().className("android.widget.Button"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().textStartsWith("通讯卫士"));
+        if(result.exists()){
+            throw new Exception("No implement of valid function for phonenumber and name in AddBlakNumberActivity .");
+        }
+    }
+    @Test
+    public void t14AddContactName() throws Exception {
+        UiObject result = mDevice.findObject(new UiSelector().textStartsWith("通讯卫士"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().className("android.widget.Button"));
+        result.clickAndWaitForNewWindow();
+        List<UiObject2> results;
+        results = mDevice.findObjects(By.clazz(EditText.class));
+        UiObject2 name = results.get(1);
+        name.setText("");
+        results = mDevice.findObjects(By.clazz(Button.class));
+        UiObject2 addFromContact = results.get(1);
+        addFromContact.click();
+        UiScrollable contactList = new UiScrollable( new UiSelector().className("android.widget.ListView"));
+        UiObject note = contactList.getChildByText(new UiSelector().className("android.widget.TextView"), "York Cui", true);
+        note.clickAndWaitForNewWindow();
+        results = mDevice.findObjects(By.clazz(EditText.class));
+        name = results.get(1);
+        String str = name.getText();
+        assertEquals("get name from contact list",str,"York Cui");
+    }
+    @Test
+    public void t15BlacknameListViewScroll() throws Exception {
+        UiObject result = mDevice.findObject(new UiSelector().textStartsWith("通讯卫士"));
+        result.clickAndWaitForNewWindow();
+        UiScrollable  blackList = new UiScrollable(new UiSelector().className("android.widget.ListView"));
+        result = blackList.getChildByInstance(new UiSelector().className("android.widget.TextView"), 0);
+        str = result.getText();
+        mDevice.swipe(200,600,200,200,50);
+        sleep(50);
+        mDevice.swipe(200,600,200,200,50);
+        sleep(50);
+        result = blackList.getChildByInstance(new UiSelector().className("android.widget.TextView"), 0);
+        str1 = result.getText();
+        if (str1.equals(str)){
+            throw new Exception("Blacklist can't be scrolled to load more items.");
+        }
+    }
 }
