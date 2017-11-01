@@ -29,4 +29,16 @@
     <item name="android:textSize">14sp</item>
     <item name="android:gravity">center_vertical</item>
     </style>
+
+    <style name="CustomTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowAnimationStyle">@style/FadeAnimationStyle</item>
+    </style>
+
+
+    <style name="FadeAnimationStyle" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/next_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/next_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/next_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/next_out</item>
+    </style>
 </resources>
