@@ -20,6 +20,7 @@ import cn.edu.gdmec.android.mobileguard.m2theftguard.dialog.SetUpPasswrodDialog;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.LostFindActivity;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.receiver.MyDeviceAdminReceiver;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.utils.MD5Utils;
+import cn.edu.gdmec.android.mobileguard.m3communicationguard.SecurityPhoneActivity;
 
 public class HomeActivity extends AppCompatActivity {
     private GridView gv_home;
@@ -31,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         msharedPreferences = getSharedPreferences("config",MODE_PRIVATE);
         gv_home=(GridView)findViewById(R.id.gv_home);
         gv_home.setAdapter(new HomeAdapter(HomeActivity.this));
@@ -46,6 +47,9 @@ public class HomeActivity extends AppCompatActivity {
                         }else{
                             showSetUpPswdDialog();
                         }
+                        break;
+                    case 1:
+                        startActivity(SecurityPhoneActivity.class);
                 }
             }
         });

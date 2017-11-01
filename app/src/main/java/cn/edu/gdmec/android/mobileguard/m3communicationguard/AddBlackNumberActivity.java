@@ -41,6 +41,9 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
             String name = data.getStringExtra("name");
             mNameET.setText(name);
             mNumET.setText(phone);
+          System.out.print(phone);
+        }else{
+            System.out.print("name");
         }
     }
 
@@ -80,21 +83,22 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
                         info.mode = 3;
                     }else if (mSmsCB.isChecked()& !mTelCB.isChecked()){
                         info.mode = 2;
-                    }else if (!mSmsCB.isChecked()&mTelCB.isChecked()){
+                    }else if (!mSmsCB.isChecked() & mTelCB.isChecked()){
                         info.mode = 1;
                     }else {
                         Toast.makeText(this, "请选择拦截模式", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (dao.IsNumberExist(info.phoneNumber)){
-                        dao.add(info);
+                    if (dao.IsNumberExist(phone)){
+                         dao.add(info);
                     }else{
-                        Toast.makeText(this, "该号码已存在", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, phone, Toast.LENGTH_SHORT).show();
                     }
+                    finish();
                 }
                 break;
             case R.id.add_fromcontact_btn:
-                 startActivity(new Intent(this, ContactSelectActivity.class));
+                 startActivityForResult(new Intent(this,ContactSelectActivity.class),0);
                 break;
         }
     }

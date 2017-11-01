@@ -98,9 +98,9 @@ public class BlackContactAdapter extends BaseAdapter {
                     //如果全部记录都删空了
                     if (dao.getTotalNumber() == 0){
                         callBack.DataSizeChanged();
-                    }else{
-                        Toast.makeText(context,"删除失败",Toast.LENGTH_LONG).show();
                     }
+                }else{
+                    Toast.makeText(context,"删除失败",Toast.LENGTH_LONG).show();
                 }
             }
         });
