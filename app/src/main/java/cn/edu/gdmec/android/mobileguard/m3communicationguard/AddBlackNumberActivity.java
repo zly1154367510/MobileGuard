@@ -3,14 +3,18 @@ package cn.edu.gdmec.android.mobileguard.m3communicationguard;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cn.edu.gdmec.android.mobileguard.R;
+import cn.edu.gdmec.android.mobileguard.m2theftguard.ContactSelectActivity;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.db.dao.BlackNumberDao;
+import cn.edu.gdmec.android.mobileguard.m3communicationguard.entity.BlackContactInfo;
 
 public class AddBlackNumberActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -62,11 +66,30 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
             case R.id.imgv_leftbtn:
                 finish();
                 break;
-            case R.id.et_balcknumber:
-
+            case R.id.add_blacknum_btn:
+                String phone = mNumET.getText().toString().trim();
+                String name = mNameET.getText().toString().trim();
+                if (TextUtils.isEmpty(phone)||TextUtils.isEmpty(name)){
+                    Toast.makeText(this, "某项为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }else{
+                    BlackContactInfo info = new BlackContactInfo();
+                    info.phoneNumber = phone;
+                    info.contactName = name;
+                    if (mSmsCB.isChecked()&mTelCB.isChecked()){
+                        info.mode = 3;
+                    }else if (mSmsCB.isChecked()& !mTelCB.isChecked()){
+                        info.mode = 2;
+                    }else if (!mSmsCB.isChecked()&mTelCB.isChecked()){
+                        info.mode = 1;
+                    }else {
+                        Toast.makeText(this, "请选择拦截模式", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
                 break;
-            case R.id.et_blackname:
-
+            case R.id.add_fromcontact_btn:
+                 startActivity(new Intent(this, ContactSelectActivity.class));
                 break;
         }
     }
