@@ -93,7 +93,7 @@ public class BlackNumberDaoTest {
 
     }
     /**
-     * 测试号码是否在库中
+     * 测试号码是否在库中。
      */
     @Test
     public void t6IsNumberExist() throws Exception{
