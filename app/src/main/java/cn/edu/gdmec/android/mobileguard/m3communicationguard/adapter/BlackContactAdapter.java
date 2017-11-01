@@ -34,6 +34,13 @@ public class BlackContactAdapter extends BaseAdapter {
 
     }
 
+    public BlackContactAdapter(List<BlackContactInfo> s,Context context){
+        super();
+        this.contactInfos = s;
+        this.context = context;
+        dao = new BlackNumberDao(context);
+    }
+
 
     public interface BlackConactCallBack{
         void DataSizeChanged();

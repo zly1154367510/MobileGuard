@@ -86,6 +86,11 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
                         Toast.makeText(this, "请选择拦截模式", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    if (dao.IsNumberExist(info.phoneNumber)){
+                        dao.add(info);
+                    }else{
+                        Toast.makeText(this, "该号码已存在", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
             case R.id.add_fromcontact_btn:
