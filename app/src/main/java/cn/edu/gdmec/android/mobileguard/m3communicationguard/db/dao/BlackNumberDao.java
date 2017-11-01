@@ -74,6 +74,18 @@ public class BlackNumberDao {
         return mBlackContactInfos;
 
     }
+    public boolean IsNUmberExist(String number){
+        SQLiteDatabase db=blackNumberOpenHelper.getReadableDatabase();
+        Cursor cursor=db.query("blacknumber",null,"number=?",new String[]{number},null,null,null);
+        if (cursor.moveToNext()){
+            cursor.close();
+            db.close();
+            return true;
+        }
+        cursor.close();
+        db.close();
+        return false;
+    }
 
     public int getBlackContactMode(String number){
         Log.d("incoming phonenumber",number);
@@ -97,4 +109,6 @@ public class BlackNumberDao {
         db.close();
         return count;
     }
+
+
 }
