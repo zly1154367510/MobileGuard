@@ -74,7 +74,7 @@ public class BlackNumberDao {
         return mBlackContactInfos;
 
     }
-    public boolean IsNUmberExist(String number){
+    public boolean IsNumberExist(String number){
         SQLiteDatabase db=blackNumberOpenHelper.getReadableDatabase();
         Cursor cursor=db.query("blacknumber",null,"number=?",new String[]{number},null,null,null);
         if (cursor.moveToNext()){
