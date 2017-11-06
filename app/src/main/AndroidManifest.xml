@@ -73,7 +73,8 @@
         </receiver>
 
         <activity android:name=".m3communicationguard.AddBlackNumberActivity" />
-        <activity android:name=".m3communicationguard.SecurityPhoneActivity"></activity>
+        <activity android:name=".m3communicationguard.SecurityPhoneActivity" />
+        <activity android:name=".m4appmanager.AppManagerActivity"></activity>
     </application>
 
 </manifest>
