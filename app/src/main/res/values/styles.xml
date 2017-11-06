@@ -26,10 +26,25 @@
     </style>
 
     <style name="textview14sp" parent="wrapcontent">
-    <item name="android:textSize">14sp</item>
-    <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
-
+    <!--软件管家模块2017-11-6-->
+    <style name="zero_widthwrapcontent">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    <style name="tvyellow14sp" parent="zero_widthwrapcontent">
+        <item name="android:textSize">14sp</item>
+        <item name="android:drawablePadding">3dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/bright_yellow</item>
+    </style>
+    <style name="textview12sp" parent="wrapcontent">
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
     <style name="CustomTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowAnimationStyle">@style/FadeAnimationStyle</item>
     </style>
@@ -41,4 +56,5 @@
         <item name="android:activityCloseEnterAnimation">@anim/next_in</item>
         <item name="android:activityCloseExitAnimation">@anim/next_out</item>
     </style>
+    
 </resources>
