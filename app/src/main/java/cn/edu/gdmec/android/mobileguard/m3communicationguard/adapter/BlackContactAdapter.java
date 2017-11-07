@@ -1,6 +1,7 @@
 package cn.edu.gdmec.android.mobileguard.m3communicationguard.adapter;
 
 import android.content.Context;
+import android.os.SystemClock;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -29,6 +30,7 @@ public class BlackContactAdapter extends BaseAdapter {
     class ViewHolder{
         TextView mNameTV;
         TextView mModeTV;
+        TextView mTypeTV;
         View mContactImgv;
         View mDeleteView;
 
@@ -75,14 +77,20 @@ public class BlackContactAdapter extends BaseAdapter {
             holder.mModeTV = (TextView)view.findViewById(R.id.tv_black_mode);
             holder.mDeleteView = (View)view.findViewById(R.id.view_black_delete);
             holder.mContactImgv = (View)view.findViewById(R.id.view_black_icon);
+            holder.mTypeTV = (TextView)view.findViewById(R.id.tv_black_type);
             view.setTag(holder);
         }
         else{
             holder = (ViewHolder)view.getTag();
         }
         //填充视图数据
+
+
         holder.mNameTV.setText(contactInfos.get(position).contactName+"<"+contactInfos.get(position).phoneNumber+">");
+        holder.mTypeTV.setText(contactInfos.get(position).type);
+
         holder.mModeTV.setText(contactInfos.get(position).getContactName(contactInfos.get(position).mode));
+        holder.mTypeTV.setTextColor(context.getResources().getColor(R.color.bright_purple));
         holder.mNameTV.setTextColor(context.getResources().getColor(R.color.bright_purple));
         holder.mModeTV.setTextColor(context.getResources().getColor(R.color.bright_purple));
         holder.mContactImgv.setBackgroundResource(R.drawable.brightpurple_contact_icon);

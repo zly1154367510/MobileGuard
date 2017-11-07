@@ -22,6 +22,7 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
     private CheckBox mTelCB;
     private EditText mNumET;
     private EditText mNameET;
+    private EditText mTypeET;
     //数据库操作类
     private BlackNumberDao dao;
 
@@ -59,6 +60,7 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
         mTelCB = (CheckBox)findViewById(R.id.cb_blacknumber_tel);
         mNumET = (EditText)findViewById(R.id.et_balcknumber);
         mNameET = (EditText)findViewById(R.id.et_blackname);
+        mTypeET = (EditText)findViewById(R.id.et_blacktype);
         findViewById(R.id.add_blacknum_btn).setOnClickListener(this);
         findViewById(R.id.add_fromcontact_btn).setOnClickListener(this);
     }
@@ -72,6 +74,7 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
             case R.id.add_blacknum_btn:
                 String phone = mNumET.getText().toString().trim();
                 String name = mNameET.getText().toString().trim();
+                String type = mTypeET.getText().toString().trim();
                 if (TextUtils.isEmpty(phone)||TextUtils.isEmpty(name)){
                     Toast.makeText(this, "某项为空", Toast.LENGTH_SHORT).show();
                     return;
@@ -79,6 +82,7 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
                     BlackContactInfo info = new BlackContactInfo();
                     info.phoneNumber = phone;
                     info.contactName = name;
+                    info.type = type;
                     if (mSmsCB.isChecked()&mTelCB.isChecked()){
                         info.mode = 3;
                     }else if (mSmsCB.isChecked()& !mTelCB.isChecked()){
@@ -89,10 +93,10 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
                         Toast.makeText(this, "请选择拦截模式", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (dao.IsNumberExist(phone)){
+                    if (!dao.IsNumberExist(phone)){
                          dao.add(info);
                     }else{
-                        Toast.makeText(this, phone, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "添加失败", Toast.LENGTH_SHORT).show();
                     }
                     finish();
                 }

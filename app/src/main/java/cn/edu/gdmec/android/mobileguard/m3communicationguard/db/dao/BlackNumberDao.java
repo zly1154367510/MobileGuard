@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.SystemClock;
 
 import android.util.Log;
-
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -39,13 +39,14 @@ import cn.edu.gdmec.android.mobileguard.m3communicationguard.entity.BlackContact
 public class BlackNumberDao {
 
     private BlackNumberOpenHelper blackNumberOpenHelper;
+    private Context context;
 
 
 
     public BlackNumberDao(Context context){
 
         super();
-
+        this.context=context;
         blackNumberOpenHelper = new BlackNumberOpenHelper(context,"blackNumber.db",null,1);
 
     }
@@ -68,7 +69,11 @@ public class BlackNumberDao {
 
         values.put("name",blackContactInfo.contactName);
 
+
+
         values.put("mode",blackContactInfo.mode);
+
+        values.put("type",blackContactInfo.type);
 
         long rowid = db.insert("blacknumber",null,values);
 
@@ -106,7 +111,7 @@ public class BlackNumberDao {
 
         SQLiteDatabase db = blackNumberOpenHelper.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("select number,mode,name from blacknumber limit ? offset ?",new String[] {String.valueOf(pagesize),String.valueOf(pagesize*pagenumber)});
+        Cursor cursor = db.rawQuery("select number,mode,name,type from blacknumber limit ? offset ?",new String[] {String.valueOf(pagesize),String.valueOf(pagesize*pagenumber)});
 
         List<BlackContactInfo> mBlackContactInfos = new ArrayList<BlackContactInfo>();
 
@@ -119,6 +124,8 @@ public class BlackNumberDao {
             info.mode = cursor.getInt(1);
 
             info.contactName = cursor.getString(2);
+
+            info.type = cursor.getString(3);
 
             mBlackContactInfos.add(info);
 
