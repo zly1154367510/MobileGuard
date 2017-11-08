@@ -11,6 +11,10 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.Toast;
 
+import java.io.ByteArrayInputStream;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+
 import cn.edu.gdmec.android.mobileguard.R;
 import cn.edu.gdmec.android.mobileguard.m4appmanager.entity.AppInfo;
 
@@ -80,14 +84,17 @@ public class EngineUtils {
         info = null;
         try {
             info = pm.getPackageInfo(appInfo.packageName, PackageManager.GET_SIGNATURES);
+            byte[] ss = info.signatures[0].toByteArray();
+            CertificateFactory cf = CertificateFactory.getInstance("X509");
+            X509Certificate cert = (X509Certificate) cf.generateCertificate(new ByteArrayInputStream(ss));
+            if (cert!=null){
+                s = cert.getIssuerDN().toString();
+            }
+
         }catch (Exception e){
             e.printStackTrace();
         }
-        autoGraph =info.signatures;
-        for (Signature a : autoGraph){
-            String i = a.toCharsString();
-            s = s + i + "\n";
-        }
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("关于应用").setMessage("Version:"+verison+"\nInstall issuer:"+s+"\nPermissions:"+powers).setPositiveButton("确定", new DialogInterface.OnClickListener() {
