@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -30,16 +31,16 @@ public class AppmanagerAdapter extends BaseAdapter {
     private List<AppInfo> SystemAppInfos;
     private Context context;
 
-    public AppmanagerAdapter (List<AppInfo> userAppInfo,List<AppInfo> SystemAppInfo,Context context){
+    public AppmanagerAdapter (List<AppInfo> userAppInfos,List<AppInfo> SystemAppInfos,Context context){
         super();
-        UserAppInfos = userAppInfo;
-        SystemAppInfos = SystemAppInfo;
+        this.UserAppInfos = userAppInfos;
+        this.SystemAppInfos = SystemAppInfos;
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return UserAppInfos.size()+SystemAppInfos.size()+2;
     }
 
     @Override
@@ -54,18 +55,14 @@ public class AppmanagerAdapter extends BaseAdapter {
             appInfo = UserAppInfos.get(position-1);
         }else{
             int location = position - UserAppInfos.size() - 2;
-            appInfo = SystemAppInfos.get(position);
+            appInfo = SystemAppInfos.get(location);
         }
         return appInfo;
     }
 
     @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    @Override
     public View getView(int i, View view, ViewGroup parent) {
+
         if (i == 0 ){
             TextView tv = getTextView();
             tv.setText("用户程序"+UserAppInfos.size()+"个");
@@ -83,7 +80,7 @@ public class AppmanagerAdapter extends BaseAdapter {
             appinfo = SystemAppInfos.get(i - UserAppInfos.size()-2);
         }
         ViewHolder holder = null;
-        if (view != null& view instanceof  LinearLayout){
+        if (view != null & view instanceof  LinearLayout){
             holder = (ViewHolder)view.getTag();
         }else{
             holder = new ViewHolder();
@@ -97,7 +94,8 @@ public class AppmanagerAdapter extends BaseAdapter {
             holder.mShareAppTV = (TextView)view.findViewById(R.id.tv_share_app);
             holder.mUnistallTV = (TextView)view.findViewById(R.id.tv_uninstall_app);
             holder.mAppOptionLL = (LinearLayout) view.findViewById(R.id.ll_option_app);
-
+            holder.mAboutTV = (TextView)view.findViewById(R.id.tv_about_app);
+            view.setTag(holder);
 
         }
         if (appinfo != null){
@@ -117,9 +115,21 @@ public class AppmanagerAdapter extends BaseAdapter {
         holder.mSettingAppTV.setOnClickListener(listener);
         holder.mShareAppTV.setOnClickListener(listener);
         holder.mUnistallTV.setOnClickListener(listener);
+        holder.mAboutTV.setOnClickListener(listener);
 
         return view;
     }
+
+
+
+
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+
 
     public TextView getTextView(){
         TextView tv = new TextView(context);
@@ -140,6 +150,7 @@ public class AppmanagerAdapter extends BaseAdapter {
         ImageView mAppIncoImgv;
         TextView mAppsizeTV;
         TextView mAppNameTV;
+        TextView mAboutTV;
         LinearLayout mAppOptionLL;
     }
     class MyClickListener implements View.OnClickListener{
@@ -165,6 +176,9 @@ public class AppmanagerAdapter extends BaseAdapter {
                     EngineUtils.SettingAppDetail(context,appInfo);
                     break;
                 case R.id.tv_uninstall_app:
+                    break;
+                case R.id.tv_about_app:
+                    EngineUtils.aboutApplication(context,appInfo);
                     break;
             }
 

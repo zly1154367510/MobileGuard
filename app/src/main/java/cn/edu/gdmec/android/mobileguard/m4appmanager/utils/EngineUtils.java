@@ -1,11 +1,17 @@
 package cn.edu.gdmec.android.mobileguard.m4appmanager.utils;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.net.Uri;
+import android.view.View;
 import android.widget.Toast;
 
+import cn.edu.gdmec.android.mobileguard.R;
 import cn.edu.gdmec.android.mobileguard.m4appmanager.entity.AppInfo;
 
 /**
@@ -50,4 +56,48 @@ public class EngineUtils {
             Toast.makeText(context,"系统应用无法删除",Toast.LENGTH_LONG).show();
         }
     }
+    public static void aboutApplication(Context context,AppInfo appInfo){
+        String verison = "";
+        String power[] = null ;
+        Signature autoGraph[] ;
+        String powers ="" ;
+        String s = new String();
+        PackageManager pm = context.getPackageManager();
+        PackageInfo info = null;
+        try {
+          info = pm.getPackageInfo(appInfo.packageName, PackageManager.GET_PERMISSIONS);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        verison = info.versionName;
+        power = info.requestedPermissions;
+
+        for (String i : power){
+            powers = powers +i+"\n";
+        }
+        info = null;
+        try {
+            info = pm.getPackageInfo(appInfo.packageName, PackageManager.GET_SIGNATURES);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        autoGraph =info.signatures;
+        for (Signature a : autoGraph){
+            String i = a.toCharsString();
+            s = s + i + "\n";
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("关于应用").setMessage("Version:"+verison+"\nInstall issuer:"+s+"\nPermissions:"+powers).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+
 }

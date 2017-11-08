@@ -5,6 +5,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class AppInfoParser {
             }else{
                 appInfo.isUserApp = true;
             }
+
             appInfos.add(appInfo);
             appInfo = null;
         }

@@ -2,6 +2,7 @@ package cn.edu.gdmec.android.mobileguard.m3communicationguard.adapter;
 
 import android.content.Context;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,6 +16,7 @@ import java.util.List;
 import cn.edu.gdmec.android.mobileguard.R;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.db.dao.BlackNumberDao;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.entity.BlackContactInfo;
+import cn.edu.gdmec.android.mobileguard.m4appmanager.entity.AppInfo;
 
 /**
  * Created by zly11 on 2017/10/30.
@@ -69,6 +71,7 @@ public class BlackContactAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View view, ViewGroup parent) {
+
        ViewHolder holder = null;
         if (view == null){
             view = View.inflate(context, R.layout.item_list_blackcontact,null);
