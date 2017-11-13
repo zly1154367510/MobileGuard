@@ -74,7 +74,9 @@
 
         <activity android:name=".m3communicationguard.AddBlackNumberActivity" />
         <activity android:name=".m3communicationguard.SecurityPhoneActivity" />
-        <activity android:name=".m4appmanager.AppManagerActivity"></activity>
+        <activity android:name=".m4appmanager.AppManagerActivity" />
+        <activity android:name=".m5virusscan.VirusScanSpeedActivity" />
+        <activity android:name=".VirusScanActivity"></activity>
     </application>
 
 </manifest>
