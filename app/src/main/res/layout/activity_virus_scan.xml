@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cn.edu.gdmec.android.mobileguard.VirusScanActivity">
+    tools:context="cn.edu.gdmec.android.mobileguard.m5virusscan.VirusScanActivity">
 
 </android.support.constraint.ConstraintLayout>
