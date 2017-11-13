@@ -85,5 +85,19 @@ public class VirusScanActivity extends AppCompatActivity {
         editor.commit();
     }
 
+    private void scanVirus(){
+        flag = true;
+        isStop = false;
+        process = 0;
+        mScanAppInfos.clear();
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                Message msg = Message.obtain();
+            }
+        };
+    }
+
 
 }
