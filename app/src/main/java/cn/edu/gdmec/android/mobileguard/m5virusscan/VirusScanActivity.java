@@ -1,11 +1,15 @@
 package cn.edu.gdmec.android.mobileguard.m5virusscan;
 
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,84 +24,42 @@ import java.util.List;
 import java.util.Locale;
 
 import cn.edu.gdmec.android.mobileguard.R;
+import cn.edu.gdmec.android.mobileguard.m2theftguard.utils.MD5Utils;
 import cn.edu.gdmec.android.mobileguard.m5virusscan.adapter.ScanVirusAdapter;
+import cn.edu.gdmec.android.mobileguard.m5virusscan.dao.AntiVirusDao;
 import cn.edu.gdmec.android.mobileguard.m5virusscan.entity.ScanAppInfo;
 
-public class VirusScanActivity extends AppCompatActivity {
+public class VirusScanActivity extends AppCompatActivity implements View.OnClickListener {
 
-    protected static final int SCAN_BENGIN = 100;
-    protected static final int SCANNING = 101;
-    protected static final int SCAN_FINISH = 102;
-    private int total;
-    private int process;
-    private TextView mProcessTV;
-    private PackageManager pm;
-    private boolean flag;
-    private boolean isStop;
-    private TextView mScanAppTV;
-    private ImageView mSanningIcon;
-    private Button mCancleBtn;
-    private RotateAnimation rani;
-    private ListView mScanListView;
-    private ScanVirusAdapter adapter;
-    private List<ScanAppInfo> mScanAppInfos = new ArrayList<ScanAppInfo>();
+    private TextView mLastTimeTV;
     private SharedPreferences mSP;
-    private Handler mHandler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch(msg.what){
-                case SCAN_BENGIN:
-                    mScanAppTV.setText("初始化杀毒引擎中");
-                    break;
-                case SCANNING:
-                    ScanAppInfo info = (ScanAppInfo)msg.obj;
-                    mScanAppTV.setText("正在扫描:"+info.appName);
-                    int speed = msg.arg1;
-                    mProcessTV.setText((speed*100/total)+"%");
-                    mScanAppInfos.add(info);
-                    adapter.notifyDataSetChanged();
-                    mScanListView.setSelection(mScanAppInfos.size());
-                    break;
-                case SCAN_FINISH:
-                    mScanAppTV.setText("扫描完成");
-                    mSanningIcon.clearAnimation();
-                    mCancleBtn.setBackgroundResource(R.drawable.scan_complete);
-                    saveScanTime();
-                    break;
-
-            }
-        }
-    };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_virus_scan);
+
     }
 
-    private void saveScanTime(){
-        SharedPreferences.Editor editor = mSP.edit();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-        String currentTime = sdf.format(new Date());
-        currentTime = "上次查杀"+currentTime;
-        editor.putString("lastVirusScan",currentTime);
-        editor.commit();
+    @Override
+    protected void onPostResume() {
+        String string = mSP.getString("lastVirusScan","您还没有查杀病毒");
+        mLastTimeTV.setText(string);
+        super.onPostResume();
+
     }
 
-    private void scanVirus(){
-        flag = true;
-        isStop = false;
-        process = 0;
-        mScanAppInfos.clear();
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                Message msg = Message.obtain();
-            }
-        };
+    private  void initView(){
+        ((TextView) findViewById(R.id.tv_title)).setText("病毒查杀");
+        ImageView mLeftImgv = (ImageView) findViewById(R.id.imgv_leftbtn);
+        mLeftImgv.setOnClickListener(this);
+        mLeftImgv.setImageResource(R.drawable.back);
+        findViewById(R.id.rl_titlebar).setBackgroundColor(getResources().getColor(R.color.purple));
+      
     }
 
+    @Override
+    public void onClick(View v) {
 
+    }
 }
