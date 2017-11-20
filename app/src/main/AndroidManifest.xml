@@ -76,7 +76,9 @@
         <activity android:name=".m3communicationguard.SecurityPhoneActivity" />
         <activity android:name=".m4appmanager.AppManagerActivity" />
         <activity android:name=".m5virusscan.VirusScanSpeedActivity" />
-        <activity android:name=".m5virusscan.VirusScanActivity"></activity>
+        <activity android:name=".m5virusscan.VirusScanActivity" />
+        <activity android:name=".m6cleancache.CacheCleanListActivity" />
+        <activity android:name=".m6cleancache.CleanCacheActivity"></activity>
     </application>
 
 </manifest>
