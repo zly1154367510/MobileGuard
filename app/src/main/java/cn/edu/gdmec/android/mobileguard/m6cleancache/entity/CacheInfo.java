@@ -1,8 +1,11 @@
 package cn.edu.gdmec.android.mobileguard.m6cleancache.entity;
 
-/**
- * Created by zly11 on 2017/11/20.
- */
+
+import android.graphics.drawable.Drawable;
 
 public class CacheInfo {
+    public String packagename;
+    public long cacheSize;
+    public Drawable appIcon;
+    public String appName;
 }
