@@ -24,7 +24,7 @@ import cn.edu.gdmec.android.mobileguard.m2theftguard.utils.MD5Utils;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.SecurityPhoneActivity;
 import cn.edu.gdmec.android.mobileguard.m4appmanager.AppManagerActivity;
 import cn.edu.gdmec.android.mobileguard.m5virusscan.VirusScanActivity;
-import cn.edu.gdmec.android.mobileguard.m6cleancache.CacheCleanListActivity;
+import cn.edu.gdmec.android.mobileguard.m6cleancache.CacheClearListActivity;
 
 public class HomeActivity extends AppCompatActivity {
     private GridView gv_home;
@@ -62,7 +62,7 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(VirusScanActivity.class);
                         break;
                     case 4:
-                        startActivity(CacheCleanListActivity.class);
+                        startActivity(CacheClearListActivity.class);
                         break;
                 }
             }

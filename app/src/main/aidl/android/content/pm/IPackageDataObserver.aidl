@@ -2,4 +2,8 @@
 package android.content.pm;
 
 
-parcelable PackageStats;
+
+oneway interface IPackageDataObserver{
+     void onRemoveCompleted(in String packageName,boolean succeeded);
+
+ }
