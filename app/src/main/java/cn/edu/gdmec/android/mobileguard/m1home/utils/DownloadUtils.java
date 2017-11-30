@@ -15,16 +15,20 @@ public class DownloadUtils {
     url 下载路径
     targeFile 存储文件夹
      */
-    public void downloadApk(String url,String targeFile,Context context){
+    public static DownloadUtils downloadutils;
+
+    public static void downloadApk(String url, String targetFile, Context context){
         DownloadManager.Request request=new DownloadManager.Request(Uri.parse(url));
         request.setAllowedOverRoaming(false);
-        MimeTypeMap mimeTypeMap =MimeTypeMap.getSingleton();
-        String mimeString=mimeTypeMap.getMimeTypeFromExtension(mimeTypeMap.getMimeTypeFromExtension(url));
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        String mimeString=mimeTypeMap.getMimeTypeFromExtension(mimeTypeMap.getFileExtensionFromUrl(url));
         request.setMimeType(mimeString);
+
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
         request.setVisibleInDownloadsUi(true);
-        request.setDestinationInExternalPublicDir("/download", targeFile);
-        DownloadManager downloadManager=(DownloadManager)context.getSystemService(Context.DOWNLOAD_SERVICE);
+
+        request.setDestinationInExternalPublicDir("/download",targetFile);
+        DownloadManager downloadManager =(DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         long mTaskid=downloadManager.enqueue(request);
     }
 }
