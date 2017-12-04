@@ -2,6 +2,7 @@ package cn.edu.gdmec.android.mobileguard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -500,7 +502,7 @@ public class ExampleInstrumentedTest {
         }
     }
 
-    @Test
+    //@Test
     public void t24EnterCleanCache() throws Exception {
         result = mDevice.findObject(new UiSelector().textStartsWith("激活此设备管理员"));
         result.clickAndWaitForNewWindow();
@@ -511,7 +513,7 @@ public class ExampleInstrumentedTest {
             throw new Exception("Can't enter CacheScanActivity.");
         }
     }
-    @Test
+    //@Test
     public void t25ScanCache() throws Exception {
         result = mDevice.findObject(new UiSelector().textStartsWith("缓存清理"));
         result.clickAndWaitForNewWindow();
@@ -523,7 +525,7 @@ public class ExampleInstrumentedTest {
             throw new Exception("Can't enter CacheScanActivity.");
         }
     }
-    @Test
+    //@Test
     public void t26CleanCache() throws Exception {
         result = mDevice.findObject(new UiSelector().textStartsWith("缓存清理"));
         result.clickAndWaitForNewWindow();
@@ -534,6 +536,56 @@ public class ExampleInstrumentedTest {
         str = result.getText();
         if(!result.exists()){
             throw new Exception("Can't enter CacheScanActivity.");
+        }
+    }
+    @Test
+    public void t27EnterTrafficMonitoring() throws Exception {
+        result = mDevice.findObject(new UiSelector().textStartsWith("激活此设备管理员"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().textStartsWith("流量统计"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().textStartsWith("中国移动"));
+        if(!result.exists()){
+            throw new Exception("Can't enter TrafficMonitoringActivity.");
+        }
+    }
+    @Test
+    public void t28SetupOperator() throws Exception {
+        result = mDevice.findObject(new UiSelector().textStartsWith("流量统计"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().className("android.widget.Button"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().textStartsWith("本日已用"));
+        if(!result.exists()){
+            throw new Exception("Can't setup operator.");
+        }
+    }
+    @Test
+    public void t29CorrectFlow() throws Exception {
+        result = mDevice.findObject(new UiSelector().textStartsWith("流量统计"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().className("android.widget.Button"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().textStartsWith("发送"));
+        if(!result.exists()){
+            throw new Exception("Can't correct flow.");
+        }
+        result.clickAndWaitForNewWindow();
+    }
+    @Test
+    public void t30ResetOperator() throws Exception {
+        result = mDevice.findObject(new UiSelector().textStartsWith("流量统计"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().textStartsWith("流量监控"));
+        Rect viewRect = result.getBounds();//获取坐标
+        int x = viewRect.centerX();
+        int y = viewRect.centerY();
+        System.out.println(x+":"+y);
+        mDevice.click(445,y);
+        sleep(500);
+        result = mDevice.findObject(new UiSelector().textStartsWith("运营商信息"));
+        if(!result.exists()){
+            throw new Exception("Can't reset opeartor.");
         }
     }
 }
