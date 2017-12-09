@@ -93,6 +93,9 @@
             android:name=".m8trafficmonitor.reciever.BootCompleteReciever"
             android:enabled="true"
             android:exported="true"></receiver>
+
+        <activity android:name=".m9advancedtools.NumBelongtoActivity" />
+        <activity android:name=".m9advancedtools.AdvancedToolsActivity"></activity>
     </application>
 
 </manifest>

@@ -538,7 +538,7 @@ public class ExampleInstrumentedTest {
             throw new Exception("Can't enter CacheScanActivity.");
         }
     }
-    @Test
+    //@Test
     public void t27EnterTrafficMonitoring() throws Exception {
         result = mDevice.findObject(new UiSelector().textStartsWith("激活此设备管理员"));
         result.clickAndWaitForNewWindow();
@@ -549,7 +549,7 @@ public class ExampleInstrumentedTest {
             throw new Exception("Can't enter TrafficMonitoringActivity.");
         }
     }
-    @Test
+    //@Test
     public void t28SetupOperator() throws Exception {
         result = mDevice.findObject(new UiSelector().textStartsWith("流量统计"));
         result.clickAndWaitForNewWindow();
@@ -560,7 +560,7 @@ public class ExampleInstrumentedTest {
             throw new Exception("Can't setup operator.");
         }
     }
-    @Test
+    //@Test
     public void t29CorrectFlow() throws Exception {
         result = mDevice.findObject(new UiSelector().textStartsWith("流量统计"));
         result.clickAndWaitForNewWindow();
@@ -572,7 +572,7 @@ public class ExampleInstrumentedTest {
         }
         result.clickAndWaitForNewWindow();
     }
-    @Test
+    //@Test
     public void t30ResetOperator() throws Exception {
         result = mDevice.findObject(new UiSelector().textStartsWith("流量统计"));
         result.clickAndWaitForNewWindow();
@@ -586,6 +586,32 @@ public class ExampleInstrumentedTest {
         result = mDevice.findObject(new UiSelector().textStartsWith("运营商信息"));
         if(!result.exists()){
             throw new Exception("Can't reset opeartor.");
+        }
+    }
+    //@Test
+    public void t31EnterAdvancedTool() throws Exception {
+        result = mDevice.findObject(new UiSelector().textStartsWith("激活此设备管理员"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().textStartsWith("高级工具"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().textStartsWith("号码归属地查询"));
+        if(!result.exists()){
+            throw new Exception("Can't enter AdvancedTool.");
+        }
+    }
+    @Test
+    public void t32NumberBelongTo() throws Exception {
+        result = mDevice.findObject(new UiSelector().textStartsWith("高级工具"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().textStartsWith("号码归属地查询"));
+        result.clickAndWaitForNewWindow();
+        result = mDevice.findObject(new UiSelector().className("android.widget.EditText"));
+        result.setText("13760795885");
+        result = mDevice.findObject(new UiSelector().className("android.widget.Button"));
+        result.click();
+        result = mDevice.findObject(new UiSelector().textContains("广东广州移动"));
+        if(!result.exists()){
+            throw new Exception("Can't find phone number belong to.");
         }
     }
 }

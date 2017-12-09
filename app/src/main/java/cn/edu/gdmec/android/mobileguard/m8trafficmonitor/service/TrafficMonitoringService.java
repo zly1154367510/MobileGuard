@@ -51,8 +51,7 @@ public class TrafficMonitoringService extends Service {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             if (calendar.DAY_OF_MONTH == 1 & calendar.HOUR_OF_DAY ==0)
-                if(calendar.DAY_OF_MONTH == 1 & calendar.HOUR_OF_DAY ==0
-                        & calendar.MINUTE < 1 & calendar.SECOND < 30){
+                if(calendar.DAY_OF_MONTH == 1 & calendar.HOUR_OF_DAY ==0 & calendar.MINUTE < 1 & calendar.SECOND < 30){
                     usedFlow = 0;
                 }
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
