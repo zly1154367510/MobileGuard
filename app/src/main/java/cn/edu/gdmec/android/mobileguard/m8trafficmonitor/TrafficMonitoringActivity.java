@@ -134,7 +134,7 @@ public class TrafficMonitoringActivity extends AppCompatActivity implements View
                         smsManager.sendTextMessage("10086", null, "CXLL", null, null);
                         break;
                     case 2:
-                        smsManager.sendTextMessage("10001",null,"108",null,null);
+                        smsManager.sendTextMessage("10010",null,"CXLL",null,null);
                         // 中国联通
                         break;
                     case 3:
