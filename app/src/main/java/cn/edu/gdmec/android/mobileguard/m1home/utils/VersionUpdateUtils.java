@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
+import android.os.Handler;
 import android.os.Message;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
@@ -35,7 +36,6 @@ import static android.content.Context.DOWNLOAD_SERVICE;
 public class VersionUpdateUtils {
     private String mVersion;
     private Activity context;
-    private ProgressDialog mProgressDialog;
     private VersionEntity versionEntity;
     private Class<?> nextActivty;
     private DownloadCallback downloadCallback;
@@ -47,8 +47,7 @@ public class VersionUpdateUtils {
     private static final int MESSAGE_SHOW_DIALOG = 104;
     private static final int MESSAGE_ENTERHOME = 105;
 
-    //private Handler handler = new Handler() {
-    private android.os.Handler handler = new android.os.Handler(){
+    private Handler handler = new android.os.Handler(){
 
 
 
@@ -82,7 +81,7 @@ public class VersionUpdateUtils {
         this.downloadCallback = downloadCallback;
         this.nextActivty = nextActivty;
     }
-    public void getCloudVersio(String url){
+    public void getCloudVersion(String url){
         try {
             HttpClient httpClient = new DefaultHttpClient ();
             /*连接超时*/
@@ -111,14 +110,16 @@ public class VersionUpdateUtils {
                 String apkurl = jsonObject.getString("apkurl");
                 versionEntity.apkurl = apkurl;
 
-                //versionEntity.versioncode= jsonObject.getString("code");
+                versionEntity.versioncode= jsonObject.getString("code");
 
-                //versionEntity.description = jsonObject.getString("des");
+                versionEntity.description = jsonObject.getString("des");
 
-                //versionEntity.apkurl = jsonObject.getString("apkurl");
+                versionEntity.apkurl = jsonObject.getString("apkurl");
 
                     // 版本号不一致
-                    handler.sendEmptyMessage ( MESSAGE_SHOW_DIALOG );
+                if (!mVersion.equals(versionEntity.versioncode)) {
+                    handler.sendEmptyMessage(MESSAGE_SHOW_DIALOG);
+                }
             }
 
         } catch (IOException e) {

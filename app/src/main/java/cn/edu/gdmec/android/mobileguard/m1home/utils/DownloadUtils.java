@@ -15,7 +15,6 @@ public class DownloadUtils {
     url 下载路径
     targeFile 存储文件夹
      */
-    public static DownloadUtils downloadutils;
 
     public static void downloadApk(String url, String targetFile, Context context){
         DownloadManager.Request request=new DownloadManager.Request(Uri.parse(url));

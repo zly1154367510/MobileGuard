@@ -1,15 +1,12 @@
 package cn.edu.gdmec.android.mobileguard.m9advancedtools;
 
-/**
- * Created by 通哥 on 2017/12/9.
- */
-
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import cn.edu.gdmec.android.mobileguard.R;
 
 public class AdvancedToolsActivity extends AppCompatActivity implements View.OnClickListener{
@@ -41,6 +38,9 @@ public class AdvancedToolsActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.advanceview_numbelongs:
                 startActivity(NumBelongtoActivity.class);
+                break;
+            case R.id.advanceview_applock:
+                startActivity(AppLockActivity.class);
                 break;
         }
     }

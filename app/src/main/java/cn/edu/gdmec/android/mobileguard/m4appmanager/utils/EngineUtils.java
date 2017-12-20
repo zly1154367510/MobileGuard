@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.io.ByteArrayInputStream;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.Date;
 
 import cn.edu.gdmec.android.mobileguard.R;
 import cn.edu.gdmec.android.mobileguard.m4appmanager.entity.AppInfo;
@@ -106,5 +107,34 @@ public class EngineUtils {
         builder.create().show();
     }
 
+    /**显示应用信息*/
+    public static void showApplicationInfo(Context context,AppInfo appInfo){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(appInfo.appName);
+        builder.setMessage("Version:"+appInfo.versionName+"\n"+
+                "Install time:"+new Date(appInfo.firstInstallTime).toLocaleString()+"\n"+
+                appInfo.signature+"\n"+
+                "Permissions:"+"\n"+appInfo.requestedPermissions);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.show();
+    }
+
+    public static void showApplicationActivities(Context context, AppInfo appInfo){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(appInfo.appName);
+        builder.setMessage("Activities:"+"\n"+appInfo.activities);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.show();
+    }
 
 }

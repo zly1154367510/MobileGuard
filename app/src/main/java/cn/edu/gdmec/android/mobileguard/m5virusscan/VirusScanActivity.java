@@ -64,7 +64,7 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
         new Thread(){
             @Override
             public void run() {
-                versionUpdateUtils.getCloudVersio("http://android2017.duapp.com/virusupdateinfo.html");
+                versionUpdateUtils.getCloudVersion("http://android2017.duapp.com/virusupdateinfo.html");
 
             }
         }.start();

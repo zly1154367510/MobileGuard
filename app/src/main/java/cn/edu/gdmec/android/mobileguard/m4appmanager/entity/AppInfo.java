@@ -22,7 +22,17 @@ public class AppInfo {
     public boolean isUserApp;
 
     public boolean isSelected = false;
-
+    public String version;
+    /**版本号*/
+    public String versionName;
+    /**安装时间*/
+    public long firstInstallTime;
+    /**签名信息*/
+    public String signature;
+    /**权限信息*/
+    public String requestedPermissions;
+    /**活动信息*/
+    public String activities;
     public String getAppLocation(boolean isInRoom){
         if (isInRoom){
             return "手机存储";
@@ -30,4 +40,5 @@ public class AppInfo {
             return "外部存储";
         }
     }
+    public boolean isLock;
 }
