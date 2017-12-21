@@ -1,62 +1,101 @@
 package cn.edu.gdmec.android.mobileguard.m4appmanager.utils;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.edu.gdmec.android.mobileguard.m4appmanager.entity.AppInfo;
 
-/**
- * Created by zly11 on 2017/11/6.
- */
-
 public class AppInfoParser {
-    /*
-    用于获取手机所有应用程序
-     */
 
     public static List<AppInfo> getAppInfos(Context context){
+        //获取包管理器。
         PackageManager pm = context.getPackageManager();
-        List<PackageInfo> packageInfos = pm.getInstalledPackages(0);
-        List<AppInfo> appInfos = new ArrayList<AppInfo>();
-        //遍历packgeInfos数组
-        for (PackageInfo packageInfo:packageInfos){
-            AppInfo appInfo = new AppInfo();
-            String packname = packageInfo.packageName;
-            appInfo.packageName = packname;
-            Drawable icon = packageInfo.applicationInfo.loadIcon(pm);
-            appInfo.icon = icon;
-            String appname = packageInfo.applicationInfo.loadLabel(pm).toString();
-            appInfo.appName = appname;
-            String apkPath = packageInfo.applicationInfo.sourceDir;
-            appInfo.apkPath = apkPath;
-            //用获取的apk路径打开文件流
-            File file = new File(apkPath);
+        //若要获得已安装app的签名和权限信息，要在获取时传入相关flags，否则不会获取。
+        List<PackageInfo> packInfos = pm.getInstalledPackages(PackageManager.GET_SIGNATURES
+                +PackageManager.GET_PERMISSIONS+PackageManager.GET_ACTIVITIES);
+        List<AppInfo> appinfos = new ArrayList<AppInfo>();
+        for(PackageInfo packInfo:packInfos){
+            AppInfo appinfo = new AppInfo();
+            String packname = packInfo.packageName;
+            appinfo.packageName = packname;
+            Drawable icon = packInfo.applicationInfo.loadIcon(pm);
+            appinfo. icon = icon;
+            String appname = packInfo.applicationInfo.loadLabel(pm).toString();
+            appinfo.appName = appname;
+            //应用程序apk包的路径
+            String apkpath = packInfo.applicationInfo.sourceDir;
+            appinfo.apkPath = apkpath;
+            File file = new File(apkpath);
             long appSize = file.length();
-            appInfo.appSize = appSize;
-            int flags = packageInfo.applicationInfo.flags;
-            //判断app安装位置
-            if ((ApplicationInfo.FLAG_EXTERNAL_STORAGE&flags) != 0){
-                appInfo.isInRoom = false;
+            appinfo.appSize = appSize;
+            //应用程序安装的位置。
+            int flags = packInfo.applicationInfo.flags; //二进制映射  大bit-map
+            if((ApplicationInfo.FLAG_EXTERNAL_STORAGE & flags)!=0){
+                //外部存储
+                appinfo.isInRoom = false;
             }else{
-                appInfo.isInRoom = true;
+                //手机内存
+                appinfo.isInRoom = true;
             }
-            if ((ApplicationInfo.FLAG_SYSTEM&flags)!=0){
-                appInfo.isUserApp = false;
+            if((ApplicationInfo.FLAG_SYSTEM&flags)!=0){
+                //系统应用
+                appinfo.isUserApp = false;
             }else{
-                appInfo.isUserApp = true;
+                //用户应用
+                appinfo.isUserApp = true;
             }
 
-            appInfos.add(appInfo);
-            appInfo = null;
+            appinfo.versionName = packInfo.versionName;
+            appinfo.firstInstallTime = packInfo.firstInstallTime;
+
+            StringBuilder sb = new StringBuilder();
+            if(packInfo.requestedPermissions !=null){
+                for(String per:packInfo.requestedPermissions){
+                    sb.append(per+"\n");
+                }
+                appinfo.requestedPermissions = sb.toString();
+            }
+            sb.delete(0,sb.length());
+            if(packInfo.activities !=null){
+                for(ActivityInfo activityInfo:packInfo.activities){
+                    sb.append(activityInfo.name+"\n");
+                }
+                appinfo.activities=sb.toString();
+            }
+
+            final Signature[] arrSignatures = packInfo.signatures;
+            for (final Signature sig : arrSignatures) {
+                /*
+                * 读取 X.509 签名证书.
+                */
+                final byte[] rawCert = sig.toByteArray();
+                InputStream certStream = new ByteArrayInputStream(rawCert);
+                try {
+                    CertificateFactory certFactory = CertificateFactory.getInstance("X509");
+                    X509Certificate x509Cert = (X509Certificate) certFactory.generateCertificate(certStream);
+                    appinfo.signature ="Certificate issuer: " + x509Cert.getIssuerDN() + "\n";
+                } catch (CertificateException e) {
+
+                }
+            }
+
+            appinfos.add(appinfo);
+            appinfo = null;
         }
-        return appInfos;
+        return appinfos;
     }
 }
