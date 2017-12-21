@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import java.util.Date;
 
+import cn.edu.gdmec.android.mobileguard.App;
 import cn.edu.gdmec.android.mobileguard.m4appmanager.entity.AppInfo;
 
 public class EngineUtils {

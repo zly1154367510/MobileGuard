@@ -1,5 +1,6 @@
 package cn.edu.gdmec.android.mobileguard.m4appmanager.utils;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -20,7 +21,11 @@ import java.util.List;
 import cn.edu.gdmec.android.mobileguard.m4appmanager.entity.AppInfo;
 
 public class AppInfoParser {
-
+    /**
+     * 获取手机里面的所有的应用程序
+     * @param context 上下文
+     * @return
+     */
     public static List<AppInfo> getAppInfos(Context context){
         //获取包管理器。
         PackageManager pm = context.getPackageManager();
@@ -89,7 +94,7 @@ public class AppInfoParser {
                     X509Certificate x509Cert = (X509Certificate) certFactory.generateCertificate(certStream);
                     appinfo.signature ="Certificate issuer: " + x509Cert.getIssuerDN() + "\n";
                 } catch (CertificateException e) {
-
+                    // e.printStackTrace();
                 }
             }
 
